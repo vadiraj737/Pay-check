@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Pay Check Calculator</title>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet"
+	type="text/css">
+<link href="css/bootstrap-responsive.css" rel="stylesheet"
+	type="text/css">
+<link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+<link href="css/bootstrap-theme.min.css" rel="stylesheet"
+	type="text/css">
+<!-- <style type="text/css">
+p {
+	padding: 50px;
+	font-size: 32px;
+	font-weight: bold;
+	text-align: center;
+	background: #f2f2f2;
+} 
+
+</style> -->
+<script>
+	$(function() {
+		$("#datepicker").datepicker({
+
+			showOn : "button",
+			buttonImage : "img/calender.jpg",
+			buttonImageOnly : true
+		});
+	});
+	
+	
+</script>
+
+</head>
+
+<body>
+	<div class="container" style="background-image: url('sky.jpg');">
+		<h1>
+			<a href="#">Pay check calculator</a>
+		</h1>
+
+		<nav role="navigation" class="navbar navbar-inverse">
+
+		<div id="navbarCollapse" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Salary</a></li>
+				<li><a href="#">Hourly</a></li>
+				<li><a href="#">W4</a></li>
+				<li><a href="#">Gross up</a></li>
+				<li><a href="#">Bonus Pay Percent</a></li>
+				<li><a href="#">Bonus Pay Aggregate</a></li>
+			</ul>
+		</div>
+		</nav>
+
+		<div class="clearfix visible-md"></div>
+
+		<div class="jumbotron">
+			<div id="testDiv">
+				<h2>Arizona Salary Paycheck Calculator</h2>
+			</div>
+			<p>Calculate your net pay or "take home pay" by entering your
+				per-period or annual salary along with the pertinent Federal, State
+				and local W-4 information into this free Arizona Paycheck
+				Calculator.</p>
+		</div>
+		<div class="clearfix visible-sm"></div>
+		<div class="clearfix visible-md"></div>
+		<div class="col-md-4 ">
+			<ul class="nav nav-list">
+				<li class="nav-header">What we are?</li>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Our Clients</a></li>
+				<li><a href="#">Our Services</a></li>
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">Contact Us</a></li>
+				<li class="nav-header">Like us on</li>
+				<li><a href="#">Google</a></li>
+				<li><a href="#">Yahoo!</a></li>
+				<li><a href="#">Facebook</a></li>
+
+			</ul>
+
+		</div>
+
+
+		<div class="col-md-8">
+			<form class="form-horizontal" role="form" action="sendValues.action"
+				id="form1" method="GET">
+				<div class="panel panel-primary">
+					<div class="panel-heading" style="background-color: navy;">
+						<h3 class="panel-title">Select Calculation Date and State</h3>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="selectDate" class="col-sm-2 control-label">Select
+						Date </label>
+					<div class="col-sm-10">
+						<input class="form-control" type="text" id="datepicker" name="datePicker"
+							placeholder="12/02/2012">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="selectState" class="col-sm-2 control-label">
+						Select State:</label>
+					<div class="col-sm-10">
+						<select class="form-control" id="state" name="state">
+							<option>Arizona</option>
+							<option>California</option>
+						</select>
+
+						<script>
+							$("#state").change(function() {
+								// $(this).val() will work here
+								document.getElementById("testDiv").innerHTML = "<h2>"+$("#state").val()+" state pay check calculator"+"</h2>";
+
+							}).change();
+						</script>
+
+					</div>
+				</div>
+
+
+				<div class="panel panel-primary">
+					<div class="panel-heading" style="background-color: navy;">
+						<h3 class="panel-title">General Information</h3>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="grossPay" class="col-sm-2 control-label">Gross
+						Pay</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="grossPay" name="grossPay"
+							placeholder="0">
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="grossPayType" class="col-sm-2 control-label">Gross
+						Pay Type</label>
+					<div class="col-sm-10">
+						<select class="form-control" id="payType" name="payType">
+							<option>Annually</option>
+							<option>Pay per period</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="grossSalaryYTD" class="col-sm-2 control-label">Gross
+						Salary YTD</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="grossSalaryYTD"  name="grossSalaryYTD"
+							placeholder="0">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="payfrequency" class="col-sm-2 control-label">Pay
+						frequency</label>
+					<div class="col-sm-10">
+						<select class="form-control" id="frequency" name="frequency">
+							<option>Weekly</option>
+							<option>Monthly</option>
+							<option>Bi-weekly</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="federalFilingStatus" class="col-sm-2 control-label">Federal
+						Filing Status</label>
+					<div class="col-sm-10">
+						<select class="form-control drop-up" id="bilingStatus" name = "bilingStatus">
+							<option>Single</option>
+							<option>Married</option>
+							<option>Non resident Alien</option>
+						</select>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="name" class="col-sm-2 control-label">I am
+						exempt from </label>
+					<div class="col-sm-10">
+
+						<label class="checkbox-inline"> <input type="checkbox"
+							id="inlineCheckbox1" value="Federal" name="Federal"> Federal
+						</label> <label class="checkbox-inline"> <input type="checkbox"
+							id="inlineCheckbox2" value="Medic Care" name="Medic Care"> Medic Care
+						</label> <label class="checkbox-inline"> <input type="checkbox"
+							id="inlineCheckbox3" value="Fica" name="Fica"> Fica
+						</label>
+					</div>
+
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default">Calculate</button>
+						<button type="button" class="btn btn-default"
+							onclick="javascript:windows.location('index.html')">Clear</button>
+					</div>
+				</div>
+			</form>
+
+			<script type="text/javascript">
+ 
+var form = $('#form1');
+form.submit(function () {	  
+$.ajax({
+type: form.attr('method'),
+url: form.attr('action'),
+data: form.serialize(),
+success: 
+})
+ 
+});
+</script>
+		</div>
+		<div class="clearfix visible-sm"></div>
+
+
+	</div>
+
+</body>
+</html>
